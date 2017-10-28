@@ -1,4 +1,11 @@
-import { ZOOM_IN, ZOOM_OUT, CHANGE_IMAGE, SET_ZOOM } from './types';
+import { ZOOM_IN, ZOOM_OUT, CHANGE_IMAGE, UNSET_IMAGE } from './types';
+import { ZOOM_MAX, ZOOM_MIN } from '../config/constants';
+
+function determineZoom(zoom) {
+  if (zoom > ZOOM_MIN && zoom < ZOOM_MAX) return zoom;
+  if (zoom < ZOOM_MIN) return ZOOM_MIN;
+  return ZOOM_MAX;
+}
 
 function zoomIn() {
   return {
@@ -12,18 +19,18 @@ function zoomOut() {
   };
 }
 
-function changeImage(imageSrc) {
+function changeImage(imageSrc, imageWidth, zoom) {
   return {
     type: CHANGE_IMAGE,
     imageSrc,
+    imageWidth,
+    zoom: determineZoom(zoom),
   };
 }
 
-function setZoom(zoom, imageWidth) {
+function unsetImage() {
   return {
-    type: SET_ZOOM,
-    zoom,
-    imageWidth,
+    type: UNSET_IMAGE,
   };
 }
 
@@ -31,5 +38,5 @@ export {
   zoomIn,
   zoomOut,
   changeImage,
-  setZoom,
+  unsetImage,
 };

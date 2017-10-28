@@ -1,5 +1,5 @@
 {
-  "name": "skybet-test",
+  "name": "image-zoom",
   "version": "1.0.0",
   "description": "test",
   "main": "index.js",
@@ -19,30 +19,25 @@
     ],
     "mapCoverage": true,
     "collectCoverageFrom": [
-      "app/**/*.{js,jsx,ts,tsx}",
-      "server/**/*.js"
+      "app/**/*.{js,jsx,ts,tsx}"
     ],
     "testMatch": [
       "**/?(*.)(spec|test).js?(x)"
     ]
   },
   "dependencies": {
-    "axios": "^0.16.2",
     "babel-core": "6.26.0",
     "babel-polyfill": "^6.26.0",
-    "body-parser": "^1.18.0",
-    "cors": "^2.8.4",
     "cross-env": "5.0.1",
-    "express": "^4.15.4",
     "prop-types": "^15.5.10",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-hot-loader": "3.0.0-beta.6",
+    "react-lazy-image": "^1.1.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "4.2.0",
     "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",

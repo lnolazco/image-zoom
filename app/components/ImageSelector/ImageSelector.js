@@ -2,22 +2,55 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { changeImage } from '../../actions/zoomActions';
+import { imagesList } from '../../config/constants';
+import { changeImage, unsetImage } from '../../actions/zoomActions';
 
 class ImageSelector extends PureComponent {
+  static getImageWidth(path) {
+    return new Promise((resolve, reject) => {
+      try {
+        const img = new Image();
+        img.onload = () => {
+          resolve(img.width);
+        };
+        img.src = path;
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
   onChange = ({ target }) => {
-    this.props.changeImage(target.value);
+    const imageSrc = target.value;
+
+    this.props.unsetImage();
+
+    if (!imageSrc) {
+      return;
+    }
+
+    ImageSelector.getImageWidth(imageSrc)
+    .then((width) => {
+      const zoom = Math.floor(((window.innerWidth / width) * 100) / 5) * 5;
+
+      this.props.changeImage(imageSrc, width, zoom);
+    });
   }
 
   render() {
     return (
       <select onChange={this.onChange}>
-        <option value="https://marvelapp.com/static/assets/images/onboarding/iphone6/Onboarding-invite.png">
-          IPhone image</option>
-        <option value="https://marvelapp.com/static/assets/images/onboarding/ipad/Onboarding-location.png">
-          IPad image</option>
-        <option value="https://marvelapp.com/static/assets/images/onboarding/web/Main-page.png">
-          Desktop image</option>
+        <option value="">Select</option>
+        {
+          imagesList.map(image => (
+            <option
+              key={image.label.split(' ').join('-')}
+              value={image.imageSrc}
+            >
+              {image.label}
+            </option>
+          ))
+        }
       </select>
     );
   }
@@ -25,6 +58,7 @@ class ImageSelector extends PureComponent {
 
 ImageSelector.propTypes = {
   changeImage: PropTypes.func.isRequired,
+  unsetImage: PropTypes.func.isRequired,
 };
 
 function mapStateToProperties(state) {
@@ -35,7 +69,8 @@ function mapStateToProperties(state) {
 
 function mapDispatchToProperties(dispatch) {
   return {
-    changeImage: imageSrc => dispatch(changeImage(imageSrc)),
+    changeImage: (imageSrc, imageWidth, zoom) => dispatch(changeImage(imageSrc, imageWidth, zoom)),
+    unsetImage: () => dispatch(unsetImage()),
   };
 }
 

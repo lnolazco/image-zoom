@@ -3,16 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { zoomIn, zoomOut } from '../../actions/zoomActions';
+import { ZOOM_MIN, ZOOM_MAX } from '../../config/constants';
 
 class ZoomControls extends PureComponent {
   render() {
     const { zoom } = this.props;
 
-    return [
-      <button key="zoom-in" onClick={this.props.zoomIn}>+</button>,
-      <span key="zoom-value">{zoom} %</span>,
-      <button key="zoom-out" onClick={this.props.zoomOut}>-</button>,
-    ];
+    return (
+      <div>
+        <button onClick={this.props.zoomOut} disabled={zoom === ZOOM_MIN}>-</button>
+        <span>{zoom} %</span>
+        <button onClick={this.props.zoomIn} disabled={zoom === ZOOM_MAX}>+</button>
+      </div>
+    );
   }
 }
 

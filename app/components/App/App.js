@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -6,9 +6,9 @@ import Image from '../Image';
 import ImageSelector from '../ImageSelector';
 import ZoomControls from '../ZoomControls';
 
-export class AppContainer extends Component {
+class App extends PureComponent {
   render() {
-    const { zoom, imageSrc } = this.props;
+    const { zoom, imageSrc, imageWidth } = this.props;
 
     return (
       <div className="app">
@@ -24,6 +24,7 @@ export class AppContainer extends Component {
           <Image
             src={imageSrc}
             zoom={zoom}
+            imageWidth={imageWidth}
           />
         </div>
       </div>
@@ -31,16 +32,18 @@ export class AppContainer extends Component {
   }
 }
 
-AppContainer.propTypes = {
+App.propTypes = {
   zoom: PropTypes.number.isRequired,
   imageSrc: PropTypes.string.isRequired,
+  imageWidth: PropTypes.number.isRequired,
 };
 
 function mapStateToProperties(state) {
   return {
     zoom: state.zoomStore.zoom,
     imageSrc: state.zoomStore.imageSrc,
+    imageWidth: state.zoomStore.imageWidth,
   };
 }
 
-export default connect(mapStateToProperties)(AppContainer);
+export default connect(mapStateToProperties)(App);

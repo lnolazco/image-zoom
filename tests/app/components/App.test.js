@@ -1,35 +1,32 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { AppContainer } from '../../../app/components/App';
-
-const props = {
-  users: [
-    { id: 1, firstname: 'demo1', surname: 'demo1' },
-    { id: 2, firstname: 'demo2', surname: 'demo2' },
-  ],
-  getAll: () => {},
-  update: () => {},
-  addUser: () => {},
-  deleteUser: () => {},
-};
+import App from '../../../app/components/App';
 
 describe('App Component', () => {
   let wrapper;
 
+  const props = {
+    zoom: 100, imageSrc: '', imageWidth: 0,
+  };
+
   beforeEach(() => {
-    wrapper = shallow(<AppContainer {...props} />);
+    wrapper = shallow(<App.WrappedComponent {...props} />);
   });
 
   it('should exist', () => {
     expect(wrapper).toBeTruthy();
   });
 
-  it('should have one header', () => {
-    expect(wrapper.find('.app__header').length);
+  it('should add an image selector', () => {
+    expect(wrapper.find('ImageSelector').length);
   });
 
-  it('should add a Table component', () => {
-    expect(wrapper.find('Table').length);
+  it('should add zoom controls', () => {
+    expect(wrapper.find('ZoomControls').length);
+  });
+
+  it('should add an image', () => {
+    expect(wrapper.find('Image').length);
   });
 });
