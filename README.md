@@ -1,6 +1,8 @@
 # IMAGE ZOOM
 
 [![Build Status](https://travis-ci.org/lnolazco/image-zoom.svg?branch=master)](https://travis-ci.org/lnolazco/image-zoom)
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://travis-ci.org/lnolazco/image-zoom)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/badges/shields.svg)](https://travis-ci.org/lnolazco/image-zoom)
 
 It uses: 
 
@@ -22,7 +24,7 @@ Node.js
 
 ## How to install
 - Clone repo `git clone git@github.com:lnolazco/image-zoom.git`
-- Then `cd image-zoo`
+- Then `cd image-zoom`
 - Run `npm install`
 
 ## Starting the app
@@ -37,3 +39,10 @@ Node.js
 - `npm test` - run all tests
 - `npm run test:watch` - run all tests in watch mode
 - `npm run coverage` - generate code coverage report in the `coverage` folder
+
+## TO IMPROVE
+
+- Add functional tests
+- Design
+- 100% test coverage
+- Get list of images from a service
